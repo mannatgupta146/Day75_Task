@@ -7,8 +7,13 @@ const App = () => {
   const [role, setRole] = useState('')
   const [description, setDescription] = useState('')
 
+  const [allUsers, setAllUsers] = useState([])
+
   function handleSubmit(e){
     e.preventDefault();
+
+    const newUser = [...allUsers, {name, imageUrl, role, description}];
+    setAllUsers(newUser);
 
     setName('');
     setImageUrl('');
@@ -57,6 +62,18 @@ const App = () => {
         />
         <button>Create User</button>
       </form>
+
+      <div>
+        {allUsers.map((user, index)=>(
+          <div key={index}>
+            <h2>{user.name}</h2>
+            <img src={user.imageUrl} alt={user.name} width="100" />
+            <h3>{user.role}</h3>
+            <p>{user.description}</p>
+          </div>
+        ))
+        }
+      </div>
     </div>
   )
 }
