@@ -1,81 +1,100 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
+import Card from "./Card";
 
 const App = () => {
+  const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [role, setRole] = useState("");
+  const [description, setDescription] = useState("");
+  const [allUsers, setAllUsers] = useState([]);
 
-  const [name, setName] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
-  const [role, setRole] = useState('')
-  const [description, setDescription] = useState('')
-
-  const [allUsers, setAllUsers] = useState([])
-
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
 
-    const newUser = [...allUsers, {name, imageUrl, role, description}];
-    setAllUsers(newUser);
+    const newUsers = [...allUsers, {
+      name,
+      imageUrl,
+      role,
+      description
+    }];
 
-    setName('');
-    setImageUrl('');
-    setRole('');
-    setDescription('');
+    setAllUsers(newUsers);
+
+    setName("");
+    setImageUrl("");
+    setRole("");
+    setDescription("");
+  }
+
+  // ✅ YOUR LOGIC (splice)
+  function deleteUser(index) {
+    const copyUsers = [...allUsers];
+    copyUsers.splice(index, 1);
+    setAllUsers(copyUsers);
   }
 
   return (
-    <div>
-      <form onSubmit={(e)=>{
-        handleSubmit(e)
-      }}>
-        <input type="text" 
-        placeholder="Enter your name" 
-        required value={name} 
-        onChange={(e)=>{
-          setName(e.target.value)
-        }}
+    <div className="h-screen flex justify-evenly bg-gray-100 p-6">
+
+      {/* LEFT FORM */}
+      <form
+        onSubmit={handleSubmit}
+        className="w-1/3 bg-blue-50 rounded-xl p-6 flex flex-col gap-4 shadow"
+      >
+        <h2 className="text-xl font-semibold text-blue-700">
+          Create User
+        </h2>
+
+        <input
+          className="border p-3 rounded"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
         />
 
-        <input type="text" 
-        placeholder="Enter Image Url" 
-        required 
-        value={imageUrl} 
-        onChange={(e)=>{
-          setImageUrl(e.target.value)
-        }}
+        <input
+          className="border p-3 rounded"
+          placeholder="Image URL"
+          value={imageUrl}
+          onChange={(e) => setImageUrl(e.target.value)}
+          required
         />
 
-        <input type="text" 
-        placeholder="Enter Role" 
-        required 
-        value={role}
-        onChange={(e)=>{
-          setRole(e.target.value)
-        }} 
+        <input
+          className="border p-3 rounded"
+          placeholder="Role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+          required
         />
 
-        <input type="text" 
-        placeholder="Enter Description" 
-        required 
-        value={description} 
-        onChange={(e)=>{
-          setDescription(e.target.value)
-        }}
+        <textarea
+          className="border p-3 rounded resize-none h-24"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
         />
-        <button>Create User</button>
+
+        <button className="mt-auto bg-blue-600 text-white py-3 rounded">
+          Create User
+        </button>
       </form>
 
-      <div>
-        {allUsers.map((user, index)=>(
-          <div key={index}>
-            <h2>{user.name}</h2>
-            <img src={user.imageUrl} alt={user.name} width="100" />
-            <h3>{user.role}</h3>
-            <p>{user.description}</p>
-          </div>
-        ))
-        }
+      {/* RIGHT SIDE – 4 CARDS (2×2) */}
+      <div className="w-1/2 grid grid-cols-2 grid-rows-2 gap-7">
+        {allUsers.slice(0, 4).map((user, index) => (
+          <Card
+            key={index}
+            user={user}
+            onDelete={() => deleteUser(index)}
+          />
+        ))}
       </div>
-    </div>
-  )
-}
 
-export default App
+    </div>
+  );
+};
+
+export default App;
