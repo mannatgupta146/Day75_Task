@@ -1,7 +1,7 @@
 # Day 75 Task | Cohort 2.0
 
 This repository contains the work completed as part of **Day 75** in **Sheryians Coding School Cohort 2.0**.  
-The focus of this task was to build a **User Management interface using React**, with emphasis on form handling, state management, and clean card-based UI design.
+The focus of this task was to build a **User Management interface using React**, with emphasis on form handling, state management, persistent storage using localStorage, and clean card-based UI design.
 
 
 ## 🖼️ Project Overview
@@ -10,6 +10,7 @@ The application provides a simple and intuitive interface where users can:
 - Add user details through a form
 - View the added users as cards in real time
 - Remove users dynamically
+- Retain user data even after page refresh
 
 The layout follows a **side-by-side structure**, with the form on the left and user cards displayed on the right for better clarity and usability.
 
@@ -26,6 +27,8 @@ The layout follows a **side-by-side structure**, with the form on the left and u
 | ➕ Add Users | New users added dynamically on form submission |
 | ❌ Delete Users | Users can be removed using a delete button |
 | 🧹 Auto Reset | Form fields reset automatically after submission |
+| 💾 Persistent Storage | User data stored in browser `localStorage` |
+| 🔁 Data Persistence | Users remain saved even after page reload |
 | 📐 Structured Layout | Form and cards placed side by side using Flexbox and Grid |
 | 🔁 Dynamic Rendering | Cards rendered dynamically using `.map()` |
 
@@ -34,7 +37,9 @@ The layout follows a **side-by-side structure**, with the form on the left and u
 
 Through this task, I learned to:
 - Handle multiple controlled form inputs in React
-- Update and manage arrays in state efficiently
+- Initialize state using data from `localStorage`
+- Store and update data persistently in the browser
+- Manage arrays in state efficiently
 - Use component-based architecture for better code organization
 - Pass functions as props for child-to-parent communication
 - Build a clean and user-friendly UI using Tailwind CSS
@@ -46,12 +51,14 @@ Through this task, I learned to:
 - React.js  
 - Tailwind CSS  
 - HTML5  
+- Browser localStorage  
 
 
 ## 📖 Learning Outcome
 
 By completing Day 75, I gained a stronger understanding of:
 - React form handling and state updates  
+- Persistent data storage using localStorage  
 - Dynamic rendering of components  
 - Component reusability and props usage  
 - Building structured and maintainable frontend layouts  
