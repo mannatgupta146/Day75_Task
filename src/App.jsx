@@ -6,7 +6,10 @@ const App = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [role, setRole] = useState("");
   const [description, setDescription] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
+
+  const localData = JSON.parse(localStorage.getItem("allUsers")) || [];
+
+  const [allUsers, setAllUsers] = useState(localData);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -20,17 +23,22 @@ const App = () => {
 
     setAllUsers(newUsers);
 
+    localStorage.setItem("allUsers", JSON.stringify(newUsers));
+
+
+    // Clear form fields
     setName("");
     setImageUrl("");
     setRole("");
     setDescription("");
   }
 
-  // ✅ YOUR LOGIC (splice)
   function deleteUser(index) {
     const copyUsers = [...allUsers];
     copyUsers.splice(index, 1);
     setAllUsers(copyUsers);
+    
+    localStorage.setItem("allUsers", JSON.stringify(copyUsers));
   }
 
   return (
